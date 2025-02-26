@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    </lin>
 </head>
+
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js"></script>
     <script src="RockPaperGame.js"></script>
+    <div id="home" class="home">
+        <h1 id="home__title" class="home__title">Rock Paper Scissor</h1>
+
+        <button id="start" onclick="main()" class="home__button">Start</button>
+
+        <div id="gameBox" class="game__box">
+            <h2 id="listItem"></h2>
+            <img id="listItemImg" src="" class="item__image" />
+            <button id="restart" class="restart__button"></button>
+        </div>
+        <div id="gameResultContainer" class="tie__results--container">
+            <div class="gameResult">
+                <img id="user" src="" class="user__img" />
+                <img id="result" src="" class="result__img" />
+                <img id="computer" src="" class="computer__img" />
+                
+            </div>
+            <h3 id="resultDescription" class="result__description"></h3>
+        </div>
+    </div>
 
 </body>
+
 </html>

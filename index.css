@@ -1,0 +1,65 @@
+body{
+
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    
+}
+.home{
+
+    border: 2px solid white;
+    border-radius: 1.25rem;
+    height: 50vh;
+    width: 50vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.home__title{
+
+
+}
+
+.home__button{
+
+    width: 25vh;
+    height: 5vw;
+
+    background-color: white;
+    color: black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border: none;
+    border-radius: 1.25rem;
+
+}
+.game__box{
+
+    display: none;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.875rem;
+}
+.item__image , .user__img, .result__img, .computer__img{
+
+    width: 6rem;
+    height: 6rem;
+}
+.tie__results--container{
+
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+}
+.restart__button{
+
+    display: none;
+}
