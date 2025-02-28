@@ -9,27 +9,71 @@
     </lin>
 </head>
 
-<body>
+<body onload="introSpeech()">
+    <!-- introSpeech() -->
+    <audio id="introMusic" src="./Intro.mp3"></audio>
+    <audio id="battleMusic" src="./battleMusic.mp3"></audio>
     <script src="RockPaperGame.js"></script>
-    <div id="home" class="home">
-        <h1 id="home__title" class="home__title">Rock Paper Scissor</h1>
-
-        <button id="start" onclick="main()" class="home__button">Start</button>
-
-        <div id="gameBox" class="game__box">
-            <h2 id="listItem"></h2>
-            <img id="listItemImg" src="" class="item__image" />
-            <button id="restart" class="restart__button"></button>
-        </div>
-        <div id="gameResultContainer" class="tie__results--container">
-            <div class="gameResult">
-                <img id="user" src="" class="user__img" />
-                <img id="result" src="" class="result__img" />
-                <img id="computer" src="" class="computer__img" />
-                
+    <div id="intro" class="intro">
+        <h2 id="introSpeaker" class="intro__speaker">Evil Villain Yapping About Something</h2>
+        <h2 id="introTitle" class="intro__title"></h2>
+    </div>
+    <div id="animation" class="intro__animation">
+        <div id="fireFrameBox" class="animation-frame">
+            <div class="fireFrame--container">
+                <img id="fireFrame" class="fire" src="./fire1.png" />
             </div>
-            <h3 id="resultDescription" class="result__description"></h3>
+            <div class="intro__shout">
+                <h2 id="shoutCallOne">ROCK</h2>
+                <h2 id="shoutCallTwo">PAPER</h2>
+                <h2 id="shoutCallThree">SCISSOR</h2>
+                <h2 id="shoutCallFinal">GO!</h2>
+            </div>
+            <script>
+                loopAnimation();
+            </script>
         </div>
+    </div>
+    <div id="home" class="home">
+        <div class="home__one">
+            <h1 id="home__title" class="home__title">Rock Paper Scissor</h1>
+
+            <button id="start" onclick="buttonStart()" class="home__button">Start</button>
+        </div>
+        <div id="homeTwo" class="home__two">
+            <img id="fireFrame2" class="fire__home" src="./fire1.png" />
+        </div>
+        <script>
+            loopAnimation2();
+        </script>
+    </div>
+
+
+    <div id="gameBox" class="game__box">
+        <div class="gameBox__one">
+            <h2 id="listItem"></h2>
+            <div>
+                <img id="userProfile" src="./fist.png" class="userProfile__image" />
+            </div>
+            <img id="computerProfile" class="computerProfile__image" src="./fire1.png" />
+        </div>
+
+        <div class="battleMeaage--container">
+            <h5 id="battleMeaages" class="battleMeaage"></h5>
+        </div>
+        <div id="attackButtons" class="attack__buttons">
+            <button id="attackRock" class="attack__rock" value="rock" >ROCK</button>        
+            <button id="attackPaper" class="attack__paper" value="paper ">PAPER</button>
+            <button id="attackScissor" class="attack__scissor" value="scissor">SCISSOR</button>
+            <button id="attackExit" class="attack__exit" value="exit">EXIT BATTLE</button>
+        </div>
+        <button id="restart" class="restart__button"></button>
+        <script>
+            loopAnimation3()
+        </script>
+
+
+    </div>
     </div>
 
 </body>
