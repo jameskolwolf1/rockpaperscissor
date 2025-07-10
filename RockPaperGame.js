@@ -1,3 +1,4 @@
+
 let numberOfGames = 0;
 let numOfPapers = 0;
 let numOfRocks = 0;
@@ -9,46 +10,6 @@ let probOfScissor = 0;
 let isGameOver = false;
 let computer = "";
 let numGamesWin = 0;
-const apitoken = "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";
-const modelEndpoint = 'https://api-inference.huggingface.co/models/bert-base-uncased';
-
-const villainPlans = [
-  "Rock, Paper, Scissors? No. This is annihilation. And you? You’re nothing. A trembling insect, flailing in the dark, praying for a miracle that will never come.Rock? I’ll grind it to dust. Paper? I’ll burn it to ashes. Scissors? I’ll twist them into your undoing. Go on. Pick your poison. No matter what you choose… I win. You lose. Always.",
-  "I bet you eat cereal for lunch",
-  "I forehead so big, its can make a map",
-  "I know your dumb, trust",
-  "I don’t need no ‘anger management.’ I need people to stop pissing me off!",
-  "I’m just here for the food. I’m not trying to get into any deep conversations, alright?",
-  "You know what? I don’t need a reason to be angry. I’m angry because I’m angry. It’s just who I am."
-];
-
-async function fetchVillainSpeech(inputText) {
-
-  const response = await fetch(modelEndpoint, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${apiToken}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ inputs: inputText, option: {max_length: 100} }),
-  });
-
-  if (response.status === 201) {
-    console.error("FAILED", response.statusText);
-    return;
-  }
-
-  const data = await response.json();
-  const speech = data[0]?.generated_text || "The villain is lost for words... but don't worry, they'll be back!";
-  document.getElementById('response').textContent = speech;
-
-  document.getElementById('villain-speech').addEventListener('click', () => {
-    // Select a random villain plan from the array
-    const randomPlan = villainPlans[Math.floor(Math.random() * villainPlans.length)];
-    fetchVillainSpeech(randomPlan);
-});
-
-}
 
 const fireImages = [
 
@@ -59,34 +20,16 @@ const fireImages = [
   "./fire6.png",
   "./fire1.png"
 ]
-
-
-
 function pause(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function loopAnimation() {
+async function loopAnimation(elementId) {
 
   let i = 0;
   while (i != fireImages.length) {
 
-    document.getElementById("fireFrame").src = fireImages[i];
-    i++
-    await pause(30);
-
-    if (fireImages.length === i) {
-
-      i = 0;
-    }
-  }
-}
-async function loopAnimation2() {
-
-  let i = 0;
-  while (i != fireImages.length) {
-
-    document.getElementById("fireFrame2").src = fireImages[i];
+    document.getElementById(elementId).src = fireImages[i];
     i++
     await pause(30);
 
@@ -164,20 +107,20 @@ async function introSpeech() {
   introAudio.play();
   await pause(1000);
 
-  // await animateText(`hmm.....Pathetic....`, 5000);
-  // await animateText(`Rock, Paper, Scissors? No.`, 5000);
-  // await animateText("This is annihilation. And you?", 5000);
-  // await animateText("You're nothing", 3500);
-  // await animateText("Rock? I'll grind it to dust.", 2000);
-  // await animateText("Paper? I'll burn it to ashes.", 2000);
-  // await animateText("Scissors? I'll twist them into your undoing.", 3000);
-  // await animateText("Go on. Pick your poison.", 2500);
-  // await animateText("So go on. Struggle. Squirm. Pretend you have a chance.", 5000);
-  // await animateText("It only makes your defeat sweeter.", 3000)
-  // await animateText("I win.", 2000);
-  // fadeOut(introAudio, 3000)
-  // await animateText("You lose. Always.", 3000);
-  // await animateText("Let the Game. Begin", 2000, true);
+  await animateText(`hmm.....Pathetic....`, 5000 , false, "introTitle");
+  await animateText(`Rock, Paper, Scissors? No.`, 5000, false, "introTitle");
+  await animateText("This is annihilation. And you?", 5000, false, "introTitle");
+  await animateText("You're nothing", 3500, false, "introTitle");
+  await animateText("Rock? I'll grind it to dust.", 2000, false, "introTitle");
+  await animateText("Paper? I'll burn it to ashes.", 2000, false, "introTitle");
+  await animateText("Scissors? I'll twist them into your undoing.", 3000, false, "introTitle");
+  await animateText("Go on. Pick your poison.", 2500, false, "introTitle");
+  await animateText("So go on. Struggle. Squirm. Pretend you have a chance.", 5000, false, "introTitle");
+  await animateText("It only makes your defeat sweeter.", 3000, false, "introTitle")
+  await animateText("I win.", 2000, false, "introTitle");
+  fadeOut(introAudio, 3000)
+  await animateText("You lose. Always.", 3000, false, "introTitle");
+  await animateText("Let the Game. Begin", 2000, true, "introTitle");
 
   // await animateText(`Rock, Paper, Scissors? No.`, 0);
   // await animateText("This is annihilation. And you?", 0);
@@ -293,92 +236,92 @@ async function buttonStart() {
 
   const battleMessage = "Battle Start";
 
-  animateText(battleMessage, 2000, false, "battleMeaages");
-  await pause(2000)
-  attackButtons.style.display = "flex";
+  await animateText(battleMessage, 2000, false, "battleMeaages");
 
 
 
   while (isGameOver === false) {
 
+    await animateText("ROCK", 500, false, "battleMeaages");
+    await animateText("PAPER", 500, false, "battleMeaages");
+    await animateText("SCISSOR", 500, false, "battleMeaages");
+    await animateText("SHOOT", 500, false, "battleMeaages");
+    attackButtons.style.display = "flex";
 
-  function waitForButtonClick() {
-    return new Promise((resolve) => {
-      document.querySelector(".attack__buttons").addEventListener("click", function(event) {
-        if (event.target.tagName === "BUTTON") {
-          const buttonValue = event.target.value;
-          console.log(buttonValue);
-          resolve(buttonValue);  // Resolve the promise with the value of the clicked button
-        }
+    function waitForButtonClick() {
+      return new Promise((resolve) => {
+        document.querySelector(".attack__buttons").addEventListener("click", function (event) {
+          if (event.target.tagName === "BUTTON") {
+            const buttonValue = event.target.value;
+            console.log(buttonValue);
+            resolve(buttonValue);  // Resolve the promise with the value of the clicked button
+          }
+        });
       });
-    });
-     
-  }
-  let user = await waitForButtonClick();
-  if (user === "exit") {
-
-    isGameOver = true;
-    const probability = finalProbability();
-    const restart = document.getElementById("restart");
-    restart.style.display = "block";
-    restart.textContent = "Restart"
-    restart.className = "home__button"
-
-
-    restart.onclick = function () {
-      window.location.reload();
     }
+    let user = await waitForButtonClick();
+    if (user === "exit") {
 
-    if (numberOfGames === 0) {
-      itemName.textContent = "I mean...you didn't win or loss, you start didn't";
-      return;
-    }
-    if (numGamesWin / numberOfGames < 45 && numGamesWin > 0) {
+      gameBox.style.display = "none";
+      isGameOver = true;
+      const probability = finalProbability();
+      const gameOver = document.getElementById("gameOver");
 
-      itemName.textContent = `You loss the War. The probably of winning is ${probability}`;
-      return;
-    }
-    if (numGamesWin / numberOfGames >= .45 && numGamesWin / numberOfGames <= .50) {
+      gameOver.style.display = "flex";
+      const gameOverText = document.getElementById("gameOverText");
 
-      itemName.textContent = `It was evenly match, hard to say. The probably of winning is ${probability}`;
-    }
-    if (numGamesWin / numberOfGames > .50 && numGamesWin / numberOfGames <= .60) {
+      if (numberOfGames === 0) {
+        gameOverText.innerHTML = "I mean...you didn't win or loss, you start didn't and you wasting my time";
+        return;
+      }
+      if (numGamesWin / numberOfGames < 45 && numGamesWin > 0) {
 
-      itemName.textContent = `Evenly Match but, you Win the war. The probably of winning is ${probability}`;
-      return;
-    }
-    if (numGamesWin / numberOfGames > .60) {
+        gameOverText.innerHTML = `You loss the War. The probably of winning is ${probability}`;
+        return;
+      }
+      if (numGamesWin / numberOfGames >= .45 && numGamesWin / numberOfGames <= .50) {
 
-      itemName.textContent = `You won the War. The probably of winning is ${probability}`;
-      return;
-    }
+        gameOverText.innerHTML = `It was evenly match, hard to say. The probably of winning is ${probability}`;
+      }
+      if (numGamesWin / numberOfGames > .50 && numGamesWin / numberOfGames <= .60) {
 
-    break;
-  }
-  // computer = guessingToWin();
-  computer = "rock";
-  console.log("Computer: ", computer);
+        gameOverText.innerHTML = `Evenly Match but, you Win the war. The probably of winning is ${probability}`;
+        return;
+      }
+      if (numGamesWin / numberOfGames > .60) {
 
+        gameOverText.innerHTML = `You won the War. The probably of winning is ${probability}`;
+        return;
+      }
 
-  switch (computer) {
-    case "rock":
-      rockBattle(computer, user);
-      numberOfGames++;
-      await pause(5000);
       break;
+    }
+    computer = guessingToWin();
+    console.log("Computer", computer);
+    console.log("User", user);
 
-    case "paper":
-      paperBattle(computer, user)
-      numberOfGames++;
-      break;
 
-    case "scissor":
-      scissorBattle(computer, user)
-      numberOfGames++;
-      break;
-    default:
-      break;
-  }
+    switch (computer) {
+      case "rock":
+        await rockBattle(computer, user);
+        numberOfGames++;
+        await pause(500);
+        break;
+
+      case "paper":
+        await paperBattle(computer, user)
+        numberOfGames++;
+        await pause(500);
+        break;
+
+      case "scissor":
+        await scissorBattle(computer, user)
+        numberOfGames++;
+        await pause(500);
+        break;
+      default:
+        break;
+    }
   }
 }
 
@@ -447,26 +390,29 @@ async function probResult() {
 async function rockBattle(computer, user) {
 
   let matchResult = "";
+  let matchMessage = "";
 
   if (user === 'paper') {
-    matchResult = 'w'
-    resultOfMatch(computer, user, matchResult);
+    matchResult = "w"
+    matchMessage = "Paper wraps around the Rock, immobilizing it completely! The enemy is trapped!"
+    await resultOfMatch(computer, user, matchResult, matchMessage);
     numOfRocks++;
     numGamesWin++;
     return;
   }
 
   if (user === 'scissor') {
-    matchResult = 'l'
-    resultOfMatch(computer, user, matchResult);
+    matchResult = "l"
+    matchMessage = "Scissors slash through Paper like a sword! The enemy is cut clean!";
+    await resultOfMatch(computer, user, matchResult, matchMessage);
     return;
   }
 
   if (user === computer) {
 
     matchResult = "e"
-
-    resultOfMatch(computer, user, matchResult);
+    matchMessage = "The mighty rocks clash with a thunderous impact! It’s a stalemate!"
+    await resultOfMatch(computer, user, matchResult, matchMessage);
     return;
 
   }
@@ -474,48 +420,57 @@ async function rockBattle(computer, user) {
 
 async function paperBattle(computer, user) {
   let matchResult = "";
+  let matchMessage = "";
+
   if (user === 'scissor') {
-    matchResult = 'w'
+    matchResult = "w"
     numOfPapers++;
     numGamesWin++;
-    resultOfMatch(computer, user, matchResult);
+    matchMessage = "Scissors slash through Paper like a sword! The enemy is cut clean!"
+    await resultOfMatch(computer, user, matchResult, matchMessage);
     return;
   }
 
   if (user === 'rock') {
-    matchResult = 'l'
-    resultOfMatch(computer, user, matchResult);;
+    matchResult = "l"
+    matchMessage = "Paper surrounds the Rock with crushing weight! User is left stunned!"
+    await resultOfMatch(computer, user, matchResult, matchMessage);;
     return;
   }
 
   if (user === computer) {
 
-    matchResult = 'e'
-    resultOfMatch(computer, user, matchResult);
+    matchResult = "e"
+    matchMessage = "The papers flutter in the wind, locked in a fierce standoff! No one wins this round."
+    await resultOfMatch(computer, user, matchResult, matchMessage);
     return;
   }
 }
 
-function scissorBattle(computer, user) {
+async function scissorBattle(computer, user) {
+  let  matchMessage = "";
   let matchResult = "w"
   if (user === 'rock') {
-    matchResult = 'w'
+    matchResult = "w"
     numOfScissors++;
     numGamesWin++;
-    resultOfMatch(computer, user, matchResult);
+    matchMessage = "User’s Rock smashes through the fragile Scissors! The enemy crumbles!";
+    await resultOfMatch(computer, user, matchResult, matchMessage);
     return;
   }
 
   if (user === 'paper') {
 
-    matchResult = 'l'
-    resultOfMatch(computer, user, matchResult);
+    matchResult = "l"
+    matchMessage = "Scissors slice through Paper with precision! The paper is shredded into pieces!";
+    await resultOfMatch(computer, user, matchResult, matchMessage);
     return;
   }
 
   if (user === computer) {
-    matchResult = 'e'
-    resultOfMatch(computer, user, matchResult);
+    matchResult = "e"
+    matchMessage = "The scissors clash with a sharp clang! Both players struggle for dominance, neither able to break through!"
+    await resultOfMatch(computer, user, matchResult, matchMessage);
     return;
   }
 }
@@ -531,31 +486,54 @@ function combinations(n, k) {
   return result;
 }
 
-async function resultOfMatch(computer, user, matchResult) {
+async function resultOfMatch(computer, user, matchResult, matchMessage) {
 
   const attackButtons = document.getElementById("attackButtons");
   attackButtons.style.display = "none";
-  
+  const battleMeaages = document.getElementById("battleMeaages");
+  battleMeaages.style.display = "flex";
 
+  const userProfile = document.getElementById("userProfile");
+  const userProfileSpeach = document.getElementById("userProfileSpeach");
+  const computerProfileSpeach = document.getElementById("computerProfileSpeach");
 
 
   switch (matchResult) {
 
     case "e":
-      resultDescrip.textContent = "Evenly Match, but  war didn't end"
+      userProfile.classList.add("userProfile__image--action");
+      await pause(3000);
+      userProfileSpeach.style.display = "block";
+      computerProfileSpeach.style.display = "block";
+      await animateText(user, 500, false, "userProfileSpeach");
+      await animateText(computer, 500, false, "computerProfileSpeach");
+      await animateText(matchMessage, 5000, false, "battleMeaages");
       break;
     case "w":
-      resultDescrip.textContent = "Win the Battle, but did you win the war";
+      userProfile.classList.add("userProfile__image--action");
+      await pause(3000);
+      userProfileSpeach.style.display = "block";
+      computerProfileSpeach.style.display = "block";
+      await animateText(user, 500, false, "userProfileSpeach");
+      await animateText(computer, 500, false, "computerProfileSpeach");
+      await animateText(matchMessage, 5000, false, "battleMeaages");
+      break;
     case "l":
-      resultDescrip.textContent = "Loss Battle, but not the war";
+      userProfile.classList.add("userProfile__image--action");
+      await pause(3000);
+      userProfileSpeach.style.display = "block";
+      computerProfileSpeach.style.display = "block";
+      await animateText(user, 500, false, "userProfileSpeach");
+      await animateText(computer, 500, false, "computerProfileSpeach");
+      await animateText(matchMessage, 5000, false, "battleMeaages");
+
     default:
       break;
   }
 
-
-  await pause(5000);
-  showGame.style.display = "flex";
-  showResult.style.display = "none";
+  userProfile.classList.remove("userProfile__image--action");
+  userProfileSpeach.style.display = "none";
+  computerProfileSpeach.style.display = "none";
 
   return
 }

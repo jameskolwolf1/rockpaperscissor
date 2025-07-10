@@ -8,6 +8,7 @@ body {
     height: 97vh;
     overflow: hidden;
     position: relative;
+    color: black;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
 
@@ -164,13 +165,13 @@ body {
     position: absolute;
     height: 100%;
     width: 80vw;
+    max-width: 60rem;
     display: none;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    padding-left: 1rem;
-    padding-right: 1rem;
     animation: spin-circle 3s forwards;
+    color: black;
 
 }
 
@@ -184,6 +185,10 @@ body {
     width: 100%;
     border: transparent;
     text-align: center;
+    background-image: url(./backgroundHome.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 
 }
 
@@ -195,13 +200,14 @@ body {
     height: 50%;
     position: relative;
     overflow: hidden;
-    animation-delay: 0.1s; /* Makes fire layers move differently */
+    animation-delay: 0.1s;
+    /* Makes fire layers move differently */
     filter: blur(1s);
     align-items: center;
 
 }
 
-.fire__home{
+.fire__home {
 
     display: flex;
     justify-content: center;
@@ -213,10 +219,11 @@ body {
     position: relative;
     z-index: 2;
     border: 5px solid transparent;
-    
+
 }
 
-.home__two::before, .home__two::after {
+.home__two::before,
+.home__two::after {
     content: "";
     position: absolute;
     top: -10px;
@@ -235,6 +242,7 @@ body {
     0% {
         transform: scale(1) translateY(0);
     }
+
     100% {
         transform: scale(1.1) translateY(-20px);
     }
@@ -245,6 +253,7 @@ body {
     0% {
         opacity: 0.8;
     }
+
     100% {
         opacity: 1;
     }
@@ -311,7 +320,9 @@ body {
     }
 }
 
-.home__title {}
+.home__title {
+
+}
 
 .home__button {
 
@@ -326,21 +337,28 @@ body {
     min-width: 11rem;
     min-height: 3vh;
     max-height: 5vh;
-
+    font-size: 2rem;
 }
-.gameBox__one{
+.home__button:hover{
+
+    background-color: black;
+    color: white;
+}
+
+.gameBox__one {
 
     position: relative;
     display: flex;
-    
+
 }
+
 .game__box {
 
     display: none;
     font-size: 1.875rem;
     background-image: url("./background.jpg");
     background-repeat: no-repeat;
-    background-position: center; 
+    background-position: center;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -349,7 +367,7 @@ body {
 
 }
 
-.userProfile__image{
+.userProfile__image {
 
     position: absolute;
     margin-left: -12rem;
@@ -357,10 +375,32 @@ body {
     width: 90px;
     animation: idleUser 1s;
     animation-iteration-count: infinite;
-    
+}
+.userProfile__image--action {
+
+    position: absolute;
+    margin-left: -12rem;
+    height: 90px;
+    width: 90px;
+    animation: dealing 3s forwards;
 
 }
-.computerProfile__image{
+@keyframes dealing {
+
+    0% { transform:  translateY(0) rotate(30deg); }
+  10% { transform: translateY(-10px) rotate(45deg); }
+  20% { transform: translateY(0) rotate(-30deg); }
+  30% { transform: translateY(-10px) rotate(45deg); }
+  40% { transform: translateY(0) rotate(-30deg); }
+  50% { transform: translateY(-10px) rotate(30deg); }
+  60% { transform: translateY(0) rotate(-25deg); }
+  70% { transform: translateY(-10px) rotate(25deg); }
+  80% { transform: translateY(0) rotate(-23deg); }
+  90% { transform: translateY(-10px) rotate(32deg); }
+  100% { transform: translateY(0) rotate(30deg); }
+
+}
+.computerProfile__image {
 
     position: absolute;
     margin-left: 7rem;
@@ -368,92 +408,125 @@ body {
     animation: idleComputer 1s;
     animation-iteration-count: infinite;
 }
-.battleMeaage--container{
+
+.battleMeaage--container {
 
     position: absolute;
     display: flex;
-    justify-content: none;
-    margin-right: 25rem;
-
-    margin-top: 15rem;
-
+    /* justify-content: center; */
+    width: 34rem;
+    margin-top: 23rem;
+    margin-right: 0rem;
+    height: 7vh;
+    /* align-items: center; */
+    /* padding-left: 18rem; */
+    /* padding-right: 0rem; */
+    align-items: end;
 }
-@keyframes idleUser{
+
+.battleMeaage {
+
+    width: 100%;
+    height: 7vh;
+}
+
+@keyframes idleUser {
 
     0% {
         transform: scale(1) translateY(0) rotate(30deg);
     }
+
     10% {
         transform: scale(1) translateY(-3px) rotate(30deg);
     }
+
     20% {
         transform: scale(1) translateY(-5px) rotate(30deg);
     }
+
     30% {
         transform: scale(1) translateY(-7px) rotate(30deg);
     }
+
     40% {
         transform: scale(1) translateY(-9px) rotate(30deg);
     }
+
     50% {
         transform: scale(1) translateY(11x) rotate(30deg);
     }
+
     60% {
         transform: scale(1) translateY(-9px) rotate(30deg);
     }
+
     70% {
         transform: scale(1) translateY(-7px) rotate(30deg);
     }
+
     80% {
         transform: scale(1) translateY(-5px) rotate(30deg);
     }
+
     90% {
         transform: scale(1) translateY(-3px) rotate(30deg);
     }
+
     100% {
         transform: scale(1) translateY(0) rotate(30deg);
     }
-    
+
 }
-@keyframes idleComputer{
+
+@keyframes idleComputer {
 
     0% {
-        transform: scale(1) translateY(-4) scale( .8);
+        transform: scale(1) translateY(-4) scale(.8);
     }
+
     10% {
-        transform: scale(1) translateY(-8px) scale( .8);
+        transform: scale(1) translateY(-8px) scale(.8);
     }
+
     20% {
-        transform: scale(1) translateY(-12px) scale( .9);
+        transform: scale(1) translateY(-12px) scale(.9);
     }
+
     30% {
-        transform: scale(1) translateY(-16px) scale( .9);
+        transform: scale(1) translateY(-16px) scale(.9);
     }
+
     40% {
         transform: scale(1) translateY(-18px);
     }
+
     50% {
         transform: scale(1) translateY(11px);
     }
+
     60% {
         transform: scale(1) translateY(-9px);
     }
+
     70% {
         transform: scale(1) translateY(-7px);
     }
+
     80% {
         transform: scale(1) translateY(-5px);
     }
+
     90% {
         transform: scale(1) translateY(-3px);
     }
+
     100% {
         transform: scale(1) translateY(0);
     }
-    
+
 }
 
-.attack__buttons{
+.attack__buttons {
 
     position: absolute;
     display: none;
@@ -463,7 +536,10 @@ body {
     margin-top: 17rem;
 }
 
-.attack__rock, .attack__paper, .attack__scissor, .attack__exit{
+.attack__rock,
+.attack__paper,
+.attack__scissor,
+.attack__exit {
 
     width: calc(50% - 5px);
     border: none;
@@ -471,9 +547,10 @@ body {
     height: 1.5rem;
     font-size: 1rem;
     font-weight: 700;
-    
+
 }
-.attack__rock{
+
+.attack__rock {
 
     color: rgb(0, 0, 0);
     background-image: url(./backgroundRock.jpg);
@@ -481,7 +558,8 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
-.attack__paper{
+
+.attack__paper {
 
     color: rgb(15, 201, 207);
     background-image: url(./backgroundPaper.jpg);
@@ -489,7 +567,8 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
-.attack__scissor{
+
+.attack__scissor {
 
     color: rgb(0, 0, 0);
     background-image: url(./backgroundScissor.jpg);
@@ -497,7 +576,8 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
-.attack__exit{
+
+.attack__exit {
 
     background-color: white;
     color: red;
@@ -522,4 +602,85 @@ body {
 .restart__button {
 
     display: none;
+}
+.computerProfile__speak, .userProfile__speak{
+
+    display: none;
+    position: absolute;
+}
+.computerProfile__speak{
+
+    color: black;
+    background-color: white;
+    width: 10rem;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 1.25rem;
+    margin-left: -13rem;
+    margin-top: -5rem;
+}
+.computerProfile__speak:before {
+    content:"";
+    position: absolute;
+    width: 10rem;
+    height: 0;
+    transform: rotate(-90deg);
+    border-top: 13px solid transparent;
+    border-right: 26px solid white;
+    border-bottom: 13px solid transparent;
+    margin: 7rem 0 0 -6rem;
+ }
+.userProfile__speak{
+
+    color: black;
+    background-color: white;
+    width: 7rem;
+    font-size: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 1.25rem;
+    margin-left: -1rem;
+    margin-top: -5rem;
+}
+.userProfile__speak::after{
+
+    content:"";
+    position: absolute;
+    width: 10rem;
+    height: 0;
+    transform: rotate(-90deg);
+    border-top: 13px solid transparent;
+    border-right: 26px solid white;
+    border-bottom: 13px solid transparent;
+    margin: 6.5rem 0 0 -2rem;
+
+}
+.gameOver{
+
+    display: none;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.gameOver__text{
+
+    width: 70%;
+    font-size: 2rem;
+}
+.gameOver__fire--container{
+
+
+    width: 30%;
+}
+.gameOver__fire{
+
+
+    width: 100%;
+}
+.gameOver__button{
+
+
+    width: 10rem;
+    height: 3rem;
 }

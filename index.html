@@ -30,7 +30,7 @@
                 <h2 id="shoutCallFinal">GO!</h2>
             </div>
             <script>
-                loopAnimation();
+                loopAnimation("fireFrame");
             </script>
         </div>
     </div>
@@ -44,7 +44,7 @@
             <img id="fireFrame2" class="fire__home" src="./fire1.png" />
         </div>
         <script>
-            loopAnimation2();
+            loopAnimation("fireFrame2");
         </script>
     </div>
 
@@ -54,28 +54,39 @@
             <h2 id="listItem"></h2>
             <div>
                 <img id="userProfile" src="./fist.png" class="userProfile__image" />
+                <p id="userProfileSpeach" class="userProfile__speak"></p>
             </div>
             <img id="computerProfile" class="computerProfile__image" src="./fire1.png" />
+            <p id="computerProfileSpeach" class="computerProfile__speak"></p>
+
         </div>
 
         <div class="battleMeaage--container">
             <h5 id="battleMeaages" class="battleMeaage"></h5>
         </div>
         <div id="attackButtons" class="attack__buttons">
-            <button id="attackRock" class="attack__rock" value="rock" >ROCK</button>        
-            <button id="attackPaper" class="attack__paper" value="paper ">PAPER</button>
+            <button id="attackRock" class="attack__rock" value="rock">ROCK</button>
+            <button id="attackPaper" class="attack__paper" value="paper">PAPER</button>
             <button id="attackScissor" class="attack__scissor" value="scissor">SCISSOR</button>
             <button id="attackExit" class="attack__exit" value="exit">EXIT BATTLE</button>
         </div>
-        <button id="restart" class="restart__button"></button>
         <script>
-            loopAnimation3()
+            loopAnimation("computerProfile")
         </script>
 
 
     </div>
+    <div id="gameOver" class="gameOver" >
+        <p id="gameOverText" class="gameOver__text"></p>
+        <div class="gameOver__fire--container">
+            <img id="fireFrame3" class="gameOver__fire" src="./fire1.png" />
+        </div>
+        <button id="restart" class="gameOver__button" onclick="location.reload();">Restart</button>
+        <script>
+            loopAnimation("fireFrame3")
+        </script>
     </div>
-
+    <script type="module" src="evilVillianAI.js"></script>
 </body>
 
 </html>
